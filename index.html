@@ -10,32 +10,23 @@
 </head>
 <body>
   <!-- this is where we are going to present quesitons to user -->
-  <header>
-    <h1>Welcome to the coding quiz let's see how much you know dummy!</h1>
-  </header>
-  <main>
-    <p>
-      Hit the start button to begin the quiz, note a 60 second timer will begin as well. Please keep up.
-    </p>
+  <main calss="container">
+    <div id="question-container" class="hide">
+        <h1>Welcome to the coding quiz let's see how much you know dummy!</h1>
+        <p id="questions">
+          Hit the start button to begin the quiz, note a 60 second timer will begin as well. Please keep up.
+        </p>
+
+
+        <h2 id="countdown"></h2>
+
+        <!-- buttons -->
+        <div class="buttons" id="start-quiz"> 
+          <button class="button" id="start-timer" type="submit">Start Quiz!</button>
+        </div>
+
+    </div>
   </main>
-    <div class="start-button">
-      <button class="btn" id="start-timer" type="submit">Start Game!</button>
-    </div>
-    <div>
-      <button class="answer">answer 1</button>
-    </div>
-    <div>
-      <button class="answer">answer 2</button>
-    </div>
-    <div>
-      <button class="answer">answer 3</button>
-    </div>
-    <div>
-      <button class="answer-1">answer 4</button>
-    </div>
-    <div>
-      <button class="answer-1">answer 5</button>
-    </div>
   <script src=./assets/js/script.js></script>
 </body>
 </html>
