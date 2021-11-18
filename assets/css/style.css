@@ -24,4 +24,10 @@ main {
   background-color: rgb(253, 248, 241);
   text-align: center;
   border: black solid 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.show {
+  color: red;
 }

@@ -10,21 +10,38 @@
 </head>
 <body>
   <!-- this is where we are going to present quesitons to user -->
-  <main calss="container">
-    <div id="question-container" class="hide">
-        <h1>Welcome to the coding quiz let's see how much you know dummy!</h1>
-        <p id="questions">
-          Hit the start button to begin the quiz, note a 60 second timer will begin as well. Please keep up.
-        </p>
+  <main class="container">
+    <div class="begining-message" id="begining-message">
+      <h1>Welcome to the coding quiz let's see how much you know!</h1>
+      <p id="intro-prompt">
+        Hit the start button to begin the quiz, note a 60 second timer will begin as well. Please keep up.
+      </p>
+    </div>
 
+    <!-- questions container starts off hidden -->
+    <div id="questions">
+      <h1 class="question-title"></h1>
+    </div>
 
-        <h2 id="countdown"></h2>
+    <!-- start quiz button -->
+    <div class="buttons" id="start-quiz"> 
+      <button class="button" id="start-timer" type="submit">Start Quiz!</button>
+    </div>
 
-        <!-- buttons -->
-        <div class="buttons" id="start-quiz"> 
-          <button class="button" id="start-timer" type="submit">Start Quiz!</button>
-        </div>
+    <h2 id="countdown"></h2>
+      
+    <!-- answer buttons -->
+    <div class="answer-div"></div>
 
+    <!-- high scores  -->
+    <div class="hidden" id="high-score-div">
+      <h1 class="high-score-title">These are the highscores</h1> 
+      <ol>
+        <li>
+          score 1
+        </li>
+      </ol>
+      <!-- input box to enter intials -->
     </div>
   </main>
   <script src=./assets/js/script.js></script>
