@@ -14,29 +14,29 @@ var currentIndex = 0;
 // array of qeustions to pull from in below functions
 var questionArray= [
   {
-    question: "question 1",
-    choices: ["correct","wrong","wrong","wrong"],
-    answer: "correct"
+    question: "True or false? new Date() is the same as moment().",
+    choices: ["True","False"],
+    answer: "False"
   },
   {
-    question: "question 2",
-    choices: ["correct","wrong","wrong","wrong"],
-    answer: "correct"
+    question: "Which Moment.js method would help us get how many days away a date is?",
+    choices: [".isAfter()",".auditTask()","Math.abs(moment).isBefore()",".diff()"],
+    answer: ".diff()"
   },
   {
-    question: "question 3",
-    choices: ["correct","wrong","wrong","wrong"],
-    answer: "correct"
+    question: "Which of the following events is NOT an event on the sortable widget?",
+    choices: ["activate","hover","out","update"],
+    answer: "hover"
   },
   {
-    question: "question 4",
-    choices: ["correct","wrong","wrong","wrong"],
-    answer: "correct"
+    question: "Which of the following is NOT an advantage of Moment.js?",
+    choices: ["Parsing dates is easier","Setting timers is easier","Manipulating dates (adding or subtracting days) is easier.","Formatting dates is easier."],
+    answer: "Setting timers is easier"
   }
 ]
 
 var timerEl = document.getElementById('countdown');
-var timeLeft = 6;
+var timeLeft = 60;
 var playerScore = 0;
 
 
@@ -85,9 +85,6 @@ var setNextQuestion = function() {
 
     // we need to connect answer buttons with questionArray[0].ansewrs
     console.log('answerbuttons',answerButtons);
-
-
-
   };
 };
 
@@ -96,10 +93,10 @@ var elvaluateChoice = function (){
 
   if(this.textContent === questionArray[currentIndex].answer) {
     questionTitle.textContent = "you got that right, way to go buddy!"
-    playerScore= playerScore + 10;
+    playerScore = playerScore + 10;
   } else {
-    // subtract 5 seconds from countdown timer
-    timeLeft = timeLeft - 5;
+    // subtract 10 seconds from countdown timer
+    timeLeft = timeLeft - 10;
   }
   currentIndex += 1;
 
@@ -113,37 +110,53 @@ var elvaluateChoice = function (){
 }
 
 var endGame = function (){
+  // hides quesition buttons and quesitons when game is over
   answerButtons.className = "hidden";
   questionTitle.className = "hidden";
+
+  // clalulate player final score based off player score and timeleft
+  finalScore = playerScore;
+  // if timer has not run out reduce to zero
   timeLeft = 0;
 
+  console.log(finalScore);
+
+  playerInitials = window;
+
+  // show highscores message when game is over
   highScoreDiv.className = "show";
 
-  localStorage.setItem('initials', ([{'SP':30},{'JW': 40}]));
-  localStorage.getItem('initials')
+  // 
+  var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+  console.log('highscores',highScores);
 
-  console.log('endgame fxn', endGame);
-// JSON.stringify <--- setting
-// JSON.parse <--- getting
+  score = {
+    score: finalScore,
+    name: playerInitials
+  };
+  
+  highScores.push(score);
+  console.log('high scores array', highScores);
 
-}
+  // ordering high scores form highest to lowest
+  highScores.sort( function(a,b) {
+    return b.finalscore - a.finalScore;
+  });
 
+  highScores.splice(5);
 
-// run when user gets wrong answer, need to call in if statment in above fxn
-var deductTime= function(currentTime) {
-  currentTime - 5
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+  // highScoresDisplay ()
+
+  submitInitialsButton.onclick = console.log('submit initials submit clickec', submitInitialsButton);
 };
 
-var highScore = function() {
-  //  localStorage.setItem("high scores", JSON.stringify(tasks));
-};
-// call the function above to complete function when clicked
+// submitInitialsButton.onclick = console.log('submit initials submit clickec', submitInitialsButton);
+
+var submitInitialsButton = document.querySelector(".submit-initials-button")
+
+
 startQuizButton.onclick = startQuiz;
 
-// go through taskinator to get new elements to come up
-// use arrays to cycle through arrays, arrays can be objects with questions and possible choices.
 
-// after click start need to add extra buttons
-
-// start button starts a timer
 
