@@ -119,22 +119,24 @@ var endGame = function (){
   // if timer has not run out reduce to zero
   timeLeft = 0;
 
-  console.log(finalScore);
+  console.log('final score',finalScore);
 
-  playerInitials = window;
-
+  playerInitials = window.prompt('please enter your initials');
+  console.log('initilas', playerInitials);
   // show highscores message when game is over
   highScoreDiv.className = "show";
 
-  // 
+  // creating highscores variable that gets high scores from local storage
   var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
   console.log('highscores',highScores);
 
+  // creating a score object for player to store initials and score
   score = {
     score: finalScore,
     name: playerInitials
   };
   
+  // push players initlas and score object into high scores
   highScores.push(score);
   console.log('high scores array', highScores);
 
@@ -146,9 +148,9 @@ var endGame = function (){
   highScores.splice(5);
 
   localStorage.setItem("highScores", JSON.stringify(highScores));
-  // highScoresDisplay ()
 
-  submitInitialsButton.onclick = console.log('submit initials submit clickec', submitInitialsButton);
+  // submitInitialsButton.onclick = "heyyyy";
+  // console.log('submit initials submit clickec', submitInitialsButton);
 };
 
 // submitInitialsButton.onclick = console.log('submit initials submit clickec', submitInitialsButton);
