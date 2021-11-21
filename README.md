@@ -1,6 +1,6 @@
 # coding-quiz
 ## Description
-This project purpose isto make a coding quiz that functions when the start button is clicked.  This starts a timer, if the player gets the wrong answer time will be deducted fromt the timer.  If the user gets the correct answer points will be added to the users score.  This project taught me about click events, DOM minipulation, and storing data in local storage within JavaScript.
+This project purpose isto make a coding quiz that functions when the start button is clicked.  This starts a timer, if the player gets the wrong answer time will be deducted fromt the timer.  If the user gets the correct answer points will be added to the users score.  This project taught me about click events, DOM minipulation, and storing data in local storage with JavaScript.
 
 ## Installation
 to install the application clone the code in the repository.  The application is also live at 
