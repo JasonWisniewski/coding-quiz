@@ -19,8 +19,10 @@
     </div>
 
     <!-- questions container starts off hidden -->
-    <div id="questions">
+    <div class="questions" id="questions">
       <h1 class="question-title"></h1>
+      <h2 id="question-answer-correct"></h2>
+      <h2 id="question-answer-incorrect"></h2>
     </div>
 
     <!-- start quiz button -->
@@ -28,22 +30,23 @@
       <button class="button" id="start-timer" type="submit">Start Quiz!</button>
     </div>
 
-    <h2 id="countdown"></h2>
+    <h2 class="timer" id="countdown"></h2>
       
     <!-- answer buttons -->
     <div class="answer-div"></div>
 
     <!-- high scores  -->
-    <div class="hidden" id="high-score-div">
-      <!-- input box to enter intials -->
-      <input class="input-initials" type="text" placeholder="Player Initials">
-      <button class="button submit-initials-button">Submit</button>
-      <h1 class="high-score-title">Game over, these are the highscores</h1> 
-      <ol id=high-scores-list>
-        <li>
-          score 1
-        </li>
-      </ol>
+    <div class="hidden high-score-contianer" id="high-score-div">
+      <div>
+        <h1 id="your-score"></h1>
+        <!-- input box to enter intials -->
+        <input class="input-initials" type="text" placeholder="Player Initials">
+        <button class="button" id="submit-initials-btn">Submit</button>
+        <h2 class="high-score-title">Game over, these are the highscores</h2> 
+
+        <ul class="high-score" id="high-scores-list"></ul>
+      </div>  
+      
       
     </div>
   </main>

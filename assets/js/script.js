@@ -2,15 +2,17 @@
 var startQuizButton = document.getElementById("start-quiz");
 var answerButtons = document.querySelector(".answer-div");
 var beginingMessage = document.getElementById("begining-message");
-var questionElement = document.getElementById("questions");
 var questionTitle = document.querySelector(".question-title");
 var highScoreDiv= document.getElementById("high-score-div");
-var highScoreTitle = document.querySelector(".high-score-title");
-
-// grabbing the timer text of html
-
+var highScoresList = document.getElementById('high-scores-list');
+var yourScoreDisplay = document.getElementById('your-score');
+var initialsInput = document.querySelector(".input-initials"); //inpKey
+var submitInitialsButton = document.getElementById("submit-initials-btn");
+var questionAnswer = document.getElementById("question-answer-correct");
 var currentIndex = 0;
-
+var timerEl = document.getElementById('countdown');
+var timeLeft = 30;
+var playerScore = 0;
 // array of qeustions to pull from in below functions
 var questionArray= [
   {
@@ -30,16 +32,10 @@ var questionArray= [
   },
   {
     question: "Which of the following is NOT an advantage of Moment.js?",
-    choices: ["Parsing dates is easier","Setting timers is easier","Manipulating dates (adding or subtracting days) is easier.","Formatting dates is easier."],
+    choices: ["Parsing dates is easier","Setting timers is easier","Manipulating dates is easier.","Formatting dates is easier."],
     answer: "Setting timers is easier"
   }
 ]
-
-var timerEl = document.getElementById('countdown');
-var timeLeft = 60;
-var playerScore = 0;
-
-
 // start quiz function
 var startQuiz = function (){
 
@@ -66,38 +62,38 @@ var startQuiz = function (){
 };
 
 var setNextQuestion = function() {
-
-  
   var currentQuestion = questionArray[currentIndex];
-  console.log('current question', currentQuestion);
   questionTitle.textContent = currentQuestion.question;
-  console.log('question title',currentQuestion.question);
 
   for(var i = 0; i< currentQuestion.choices.length; i++) {
     // using a new div to show questions since origional has been hidden
     var element = currentQuestion.choices[i];
-    console.log('element',element);
 
     var choiceButton = document.createElement("button");
     choiceButton.textContent = element;
     answerButtons.appendChild(choiceButton);
-    choiceButton.addEventListener('click',elvaluateChoice);
-
-    // we need to connect answer buttons with questionArray[0].ansewrs
-    console.log('answerbuttons',answerButtons);
+    choiceButton.addEventListener('click',evaluateChoice);
   };
 };
 
-var elvaluateChoice = function (){
-  console.log(this);
-
+var evaluateChoice = function (){
+  // check array for if player ansewr is correct
   if(this.textContent === questionArray[currentIndex].answer) {
-    questionTitle.textContent = "you got that right, way to go buddy!"
+    // add 10 to player score and disaply correct answer
     playerScore = playerScore + 10;
+    questionAnswer.textContent="Correct"
+      setTimeout(function(){
+      questionAnswer.textContent= "";
+    },1500);
   } else {
-    // subtract 10 seconds from countdown timer
+    // subtract 10 seconds from countdown timer and disaply wrong for 1.5secs
     timeLeft = timeLeft - 10;
+    questionAnswer.textContent = "Wrong";
+    setTimeout(function(){
+      questionAnswer.textContent= "";
+    },1500);
   }
+  // add one to index and push back into for loop above
   currentIndex += 1;
 
   answerButtons.innerHTML= "";
@@ -106,58 +102,64 @@ var elvaluateChoice = function (){
     endGame();
   } else {setNextQuestion();
   };
-
 }
 
 var endGame = function (){
   // hides quesition buttons and quesitons when game is over
   answerButtons.className = "hidden";
   questionTitle.className = "hidden";
+  timerEl.className = "hidden";
+  clearInterval(startQuiz);
 
   // clalulate player final score based off player score and timeleft
   finalScore = playerScore;
-  // if timer has not run out reduce to zero
-  timeLeft = 0;
 
-  console.log('final score',finalScore);
+  // if timer has run out do not show twice
+  if (timeLeft = 0) 
+    {
+  };
 
-  playerInitials = window.prompt('please enter your initials');
-  console.log('initilas', playerInitials);
   // show highscores message when game is over
   highScoreDiv.className = "show";
 
-  // creating highscores variable that gets high scores from local storage
-  var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-  console.log('highscores',highScores);
+  // dispaly your score
+  yourScoreDisplay.innerHTML = "Your final score is " + finalScore + " !";
 
-  // creating a score object for player to store initials and score
-  score = {
-    score: finalScore,
-    name: playerInitials
-  };
+  //console.log('final score',finalScore);
   
-  // push players initlas and score object into high scores
-  highScores.push(score);
-  console.log('high scores array', highScores);
+  submitInitialsButton.onclick = function () {
+    
+    // creating highscores variable that gets high scores from local storage if it doesn't return anything empty array
+    var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
-  // ordering high scores form highest to lowest
-  highScores.sort( function(a,b) {
-    return b.finalscore - a.finalScore;
-  });
+    // creating a score object for player to store initials and score
+    score = {
+      score: finalScore,
+      name: initialsInput.value
+    };
+    
+    // push players initlas and score object into high scores array in local storage
+    highScores.push(score);
 
-  highScores.splice(5);
+    // ordering high scores form highest to lowest by going through high scores
+    highScores.sort( function(a,b) {
+      return b.score - a.score;
+    });
 
-  localStorage.setItem("highScores", JSON.stringify(highScores));
+    //  cut off high scores at top 8
+    highScores.splice(8);
 
-  // submitInitialsButton.onclick = "heyyyy";
-  // console.log('submit initials submit clickec', submitInitialsButton);
+    // saving highscores in local storage
+    localStorage.setItem("highScores", JSON.stringify(highScores));    
+    console.log('high scores', highScores);
+    // displaying high scores on page, converting from local storage to html
+    highScoresList.innerHTML = highScores
+      .map(score => {
+        return `<li class="high-score">${score.name} - ${score.score}</li>`; 
+      })
+    .join("");
+  };
 };
-
-// submitInitialsButton.onclick = console.log('submit initials submit clickec', submitInitialsButton);
-
-var submitInitialsButton = document.querySelector(".submit-initials-button")
-
-
 startQuizButton.onclick = startQuiz;
 
 

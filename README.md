@@ -4,10 +4,11 @@ This project purpose isto make a coding quiz that functions when the start butto
 
 ## Installation
 to install the application clone the code in the repository.  The application is also live at 
-https://jasonwisniewski.github.io/coding-quiz2/
+https://jasonwisniewski.github.io/coding-quiz/
 
 ## Usage
 This projecgt can be used by anyone who wants to view skills I have developed in JavaScript.
+<img src="./assets/images/screen-shot.png">
 
 ## MIT License
 

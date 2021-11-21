@@ -7,10 +7,11 @@
 }
 
 button {
+  font-size: 2.5vw;
   border-radius: 15px;
   background-color: rgb(103, 160, 235);
   padding: 10px;
-  margin: 10px, 10px, 10px, 10px;
+  margin: 15px 10px 30px 10px;
 }
 
 button:hover {
@@ -18,15 +19,15 @@ button:hover {
 }
 
 main {
+  font-size: 1.75vw;
   background-color: rgb(253, 248, 241);
   text-align: center;
   border: black solid 5px;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .show {
   color: black;
+  font-size: 2vw;
 }
 
 input {
@@ -42,4 +43,24 @@ h2 {
   padding: 10px;
   margin: 10px;
 
+}
+
+.high-score {
+list-style: none;
+}
+
+.high-score:hover {
+  transform: scale(1.05);
+}
+
+.timer {
+  font-size: 3.5vw;
+  color: red;
+  font-family:'digital-clock-font';
+  src: url('put_the_location_to_your_font.ttf or .otf');
+}
+
+.input-initials {
+  height: 3vw;
+  font-size: 2.5vw;
 }
